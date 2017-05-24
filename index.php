@@ -1,26 +1,64 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: rogerio
- * Date: 17/05/17
- * Time: 14:47
- */
+
 
 require_once "Cliente.php";
+require_once "ClientePessoaFisica.php";
+require_once "ClientePessoaJuridica.php";
 
 $pessoas = array();
 
 
-$pessoas[1] = new Cliente('Rogério Canto', '140.101.144.33', 'rua joao vespucio, n62, bairro centro,', '3799999-8888');
-$pessoas[2] = new Cliente('José Silva', '150.551.774.77', 'rua sao luis, n22, bairro sao luis,', '3799999-99999');
-$pessoas[3] = new Cliente('Carol Dias', '122.122.122.33', 'rua teste, n68, bairro alvorada,', '3799999-7777');
-$pessoas[4] = new Cliente('Emilio Surita', '900.101.199.99', 'rua barao de piumhi, n99, bairro centro,', '3799999-4444');
-$pessoas[5] = new Cliente('Silvio Santos', '140.101.144.33', 'rua quintino, n62, bairro centro,', '3799999-8888');
-$pessoas[6] = new Cliente('Claudia Raia', '150.551.774.77', 'rua sao luis, n22, bairro sao luis,', '3799999-99999');
-$pessoas[7] = new Cliente('Sandy Jr', '122.122.122.33', 'rua teste, n6855, bairro alvorada,', '3799999-7777');
-$pessoas[8] = new Cliente('Rodolfo Abrantes', '900.101.199.99', 'rua barao de piumhi, n99, bairro centro,', '3799999-4444');
-$pessoas[9] = new Cliente('Claudio Ricardo', '122.122.122.33', 'rua testeteste, n6821, bairro quinzinho,', '3799999-7777');
-$pessoas[10] = new Cliente('Fausto Silva', '900.101.199.99', 'rua barao de piumhi, n99, bairro centro,', '3799999-4444');
+$pessoas[1] = new ClientePessoaFisica('140.101.144.33','rua joao vespucio, n62, bairro centro','Formiga',
+    'MG','rua joao vespucio, n62, bairro centro','casa','5');
+$pessoas[1]->setNome('Rogério Canto');
+$pessoas[1]->setTelefone('37-99999-8888');
+
+$pessoas[2] = new ClientePessoaFisica('155.555.555.55','rua sao luis, n33, bairro sao luis','Formiga',
+    'MG','rua joao vaz, n6555, bairro centro','comercial','3');
+$pessoas[2]->setNome('Jose Silva');
+$pessoas[2]->setTelefone('37-88999-0099');
+
+$pessoas[3] = new ClientePessoaFisica('999.555.999.55','rua sao luis, n444, bairro sao luis','Formiga',
+    'MG','rua joao vaz, n6555, bairro centro','comercial','3');
+$pessoas[3]->setNome('Carol Dias');
+$pessoas[3]->setTelefone('37-44444-4444');
+
+$pessoas[4] = new ClientePessoaFisica('315.335.333.33','rua sao luis, n33, bairro sao luis','Formiga',
+    'MG','rua joao vaz, n6555, bairro centro','comercial','4');
+$pessoas[4]->setNome('Francisco Xavier');
+$pessoas[4]->setTelefone('37-33339-3339');
+
+$pessoas[5] = new ClientePessoaFisica('009.500.909.00','rua dos viajantes, n3344, bairro sao luis','Formiga',
+    'MG','rua joao vaz, n5555, bairro centro','comercial','4');
+$pessoas[5]->setNome('Claudia Ohana');
+$pessoas[5]->setTelefone('37-22222-2222');
+
+$pessoas[6] = new ClientePessoaJuridica('559.555.559.55','rua sao luis, n114, bairro sao luis','Formiga',
+    'MG','rua joao vaz, n6555, bairro centro','comercial','3');
+$pessoas[6]->setNome('Lojas birobiro');
+$pessoas[6]->setTelefone('37-44444-4444');
+
+$pessoas[7] = new ClientePessoaJuridica('77.377.373.73','rua sao luis, n77, bairro sao luis','Formiga',
+    'MG','rua joao vaz, n6555, bairro centro','comercial','4');
+$pessoas[7]->setNome('Açougue Bom');
+$pessoas[7]->setTelefone('37-37779-3339');
+
+$pessoas[8] = new ClientePessoaJuridica('0569.556.969.00','rua dos viajantes, n3344, bairro sao luis','Formiga',
+    'MG','rua joao vaz, n5555, bairro centro','comercial','4');
+$pessoas[8]->setNome('Papelaria Escolar');
+$pessoas[8]->setTelefone('37-26662-2222');
+
+$pessoas[9] = new ClientePessoaJuridica('55.377.353.73','rua sao luis, n77, bairro sao luis','Formiga',
+    'MG','rua joao vaz, n6555, bairro centro','comercial','4');
+$pessoas[9]->setNome('Farmacia Drogabom');
+$pessoas[9]->setTelefone('37-55779-3339');
+
+$pessoas[10] = new ClientePessoaJuridica('789.577.779.00','rua dos viajantes, n3344, bairro sao luis','Formiga',
+    'MG','rua joao vaz, n5555, bairro centro','comercial','4');
+$pessoas[10]->setNome('Laboratorio Veruska');
+$pessoas[10]->setTelefone('37-26662-2222');
+
+
 
 $id = $_GET['id'];
 
@@ -103,6 +141,7 @@ if($ordem == 'desc'){
             <thead>
             <tr>
                 <th><a href="index.php?&ordem=<?php echo $ordem ?>">#</a></th>
+                <th>Cliente</th>
                 <th>Nome</th>
                 <th>CPF</th>
             </tr>
@@ -116,10 +155,25 @@ if($ordem == 'desc'){
                         <?php echo $key; ?>
                     </td>
                     <td>
+                        <?php
+                        if ($pessoa instanceof ClientePessoaFisica) {
+                            echo 'PessoaFisica';
+                        }else{
+                            echo 'PessoaJuridica';
+                        }
+                         ?>
+                    </td>
+                    <td>
                         <a href="index.php?&id=<?php echo $key ?>"><?php echo $pessoa->getNome(); ?></a>
                     </td>
                     <td>
-                        <?php echo $pessoa->getCPF(); ?>
+                        <?php
+                        if ($pessoa instanceof ClientePessoaFisica) {
+                            echo $pessoa->getCPF();
+                        }else{
+                            echo $pessoa->getCNPJ();
+                        }
+                         ?>
                     </td>
                 </tr>
                 <?php
@@ -138,7 +192,11 @@ if($ordem == 'desc'){
                 <th>Nome</th>
                 <th>CPF</th>
                 <th>Endereço</th>
+                <th>Cidade</th>
+                <th>UF</th>
                 <th>Telefone</th>
+                <th>Endereco de Cobranca</th>
+                <th>Tipo</th>
             </tr>
             </thead>
             <tbody>
@@ -153,13 +211,29 @@ if($ordem == 'desc'){
                     <?php echo $pessoa->getNome(); ?>
                 </td>
                 <td>
-                    <?php echo $pessoa->getCPF(); ?>
+                    <?php if ($pessoa instanceof ClientePessoaFisica) {
+                        echo $pessoa->getCPF();
+                    }else{
+                        echo $pessoa->getCNPJ();
+                    } ?>
                 </td>
                 <td>
                     <?php echo $pessoa->getEndereco(); ?>
                 </td>
                 <td>
+                    <?php echo $pessoa->getCidade(); ?>
+                </td>
+                <td>
+                    <?php echo $pessoa->getUF(); ?>
+                </td>
+                <td>
                     <?php echo $pessoa->getTelefone(); ?>
+                </td>
+                <td>
+                    <?php echo $pessoa->getEnd_Cobranca(); ?>
+                </td>
+                <td>
+                    <?php echo $pessoa->getTipoEnd_Cobranca(); ?>
                 </td>
             </tr>
 
