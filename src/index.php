@@ -1,68 +1,75 @@
 <?php
 
 
-require_once "Cliente.php";
-require_once "ClientePessoaFisica.php";
-require_once "ClientePessoaJuridica.php";
+use vendor\Clientes\Types\ClientePessoaFisica;
+
+define('CLASS_DIR','src/');
+//set_include_path(get_include_path().PATH_SEPARATOR.CLASS_DIR);
+set_include_path('/var/www/html/aula_oo/'.CLASS_DIR);
+spl_autoload_register('loader');
+
+function loader($class) {
+    $class = str_ireplace('\\',DIRECTORY_SEPARATOR,$class);
+    include $class . '.php';
+}
 
 $pessoas = array();
 
-
-$pessoas[1] = new ClientePessoaFisica('140.101.144.33','rua joao vespucio, n62, bairro centro','Formiga',
+$pessoas[1] = new vendor\Clientes\Types\ClientePessoaFisica('140.101.144.33','rua joao vespucio, n62, bairro centro','Formiga',
     'MG','rua joao vespucio, n62, bairro centro','casa','5');
 $pessoas[1]->setNome('Rogério Canto');
 $pessoas[1]->setTelefone('37-99999-8888');
 
-$pessoas[2] = new ClientePessoaFisica('155.555.555.55','rua sao luis, n33, bairro sao luis','Formiga',
+$pessoas[2] = new vendor\Clientes\Types\ClientePessoaFisica('155.555.555.55','rua sao luis, n33, bairro sao luis','Formiga',
     'MG','rua joao vaz, n6555, bairro centro','comercial','3');
 $pessoas[2]->setNome('Jose Silva');
 $pessoas[2]->setTelefone('37-88999-0099');
 
-$pessoas[3] = new ClientePessoaFisica('999.555.999.55','rua sao luis, n444, bairro sao luis','Formiga',
+$pessoas[3] = new vendor\Clientes\Types\ClientePessoaFisica('999.555.999.55','rua sao luis, n444, bairro sao luis','Formiga',
     'MG','rua joao vaz, n6555, bairro centro','comercial','3');
 $pessoas[3]->setNome('Carol Dias');
 $pessoas[3]->setTelefone('37-44444-4444');
 
-$pessoas[4] = new ClientePessoaFisica('315.335.333.33','rua sao luis, n33, bairro sao luis','Formiga',
+$pessoas[4] = new vendor\Clientes\Types\ClientePessoaFisica('315.335.333.33','rua sao luis, n33, bairro sao luis','Formiga',
     'MG','rua joao vaz, n6555, bairro centro','comercial','4');
 $pessoas[4]->setNome('Francisco Xavier');
 $pessoas[4]->setTelefone('37-33339-3339');
 
-$pessoas[5] = new ClientePessoaFisica('009.500.909.00','rua dos viajantes, n3344, bairro sao luis','Formiga',
+$pessoas[5] = new vendor\Clientes\Types\ClientePessoaFisica('009.500.909.00','rua dos viajantes, n3344, bairro sao luis','Formiga',
     'MG','rua joao vaz, n5555, bairro centro','comercial','4');
 $pessoas[5]->setNome('Claudia Ohana');
 $pessoas[5]->setTelefone('37-22222-2222');
 
-$pessoas[6] = new ClientePessoaJuridica('559.555.559.55','rua sao luis, n114, bairro sao luis','Formiga',
+$pessoas[6] = new vendor\Clientes\Types\ClientePessoaJuridica('559.555.559.55','rua sao luis, n114, bairro sao luis','Formiga',
     'MG','rua joao vaz, n6555, bairro centro','comercial','3');
 $pessoas[6]->setNome('Lojas birobiro');
 $pessoas[6]->setTelefone('37-44444-4444');
 
-$pessoas[7] = new ClientePessoaJuridica('77.377.373.73','rua sao luis, n77, bairro sao luis','Formiga',
+$pessoas[7] = new vendor\Clientes\Types\ClientePessoaJuridica('77.377.373.73','rua sao luis, n77, bairro sao luis','Formiga',
     'MG','rua joao vaz, n6555, bairro centro','comercial','4');
 $pessoas[7]->setNome('Açougue Bom');
 $pessoas[7]->setTelefone('37-37779-3339');
 
-$pessoas[8] = new ClientePessoaJuridica('0569.556.969.00','rua dos viajantes, n3344, bairro sao luis','Formiga',
+$pessoas[8] = new vendor\Clientes\Types\ClientePessoaJuridica('0569.556.969.00','rua dos viajantes, n3344, bairro sao luis','Formiga',
     'MG','rua joao vaz, n5555, bairro centro','comercial','4');
 $pessoas[8]->setNome('Papelaria Escolar');
 $pessoas[8]->setTelefone('37-26662-2222');
 
-$pessoas[9] = new ClientePessoaJuridica('55.377.353.73','rua sao luis, n77, bairro sao luis','Formiga',
+$pessoas[9] = new vendor\Clientes\Types\ClientePessoaJuridica('55.377.353.73','rua sao luis, n77, bairro sao luis','Formiga',
     'MG','rua joao vaz, n6555, bairro centro','comercial','4');
 $pessoas[9]->setNome('Farmacia Drogabom');
 $pessoas[9]->setTelefone('37-55779-3339');
 
-$pessoas[10] = new ClientePessoaJuridica('789.577.779.00','rua dos viajantes, n3344, bairro sao luis','Formiga',
+$pessoas[10] = new vendor\Clientes\Types\ClientePessoaJuridica('789.577.779.00','rua dos viajantes, n3344, bairro sao luis','Formiga',
     'MG','rua joao vaz, n5555, bairro centro','comercial','4');
 $pessoas[10]->setNome('Laboratorio Veruska');
 $pessoas[10]->setTelefone('37-26662-2222');
 
 
 
-$id = $_GET['id'];
+$id = @$_GET['id'];
 
-$ordem = $_GET['ordem'];
+$ordem = @$_GET['ordem'];
 
 if($ordem == 'desc'){
     $ordem = 'asc';
@@ -87,7 +94,7 @@ if($ordem == 'desc'){
     <title>Aula de OO - Projeto 1</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -161,7 +168,7 @@ if($ordem == 'desc'){
                         }else{
                             echo 'PessoaJuridica';
                         }
-                         ?>
+                        ?>
                     </td>
                     <td>
                         <a href="index.php?&id=<?php echo $key ?>"><?php echo $pessoa->getNome(); ?></a>
@@ -173,7 +180,7 @@ if($ordem == 'desc'){
                         }else{
                             echo $pessoa->getCNPJ();
                         }
-                         ?>
+                        ?>
                     </td>
                 </tr>
                 <?php
@@ -253,7 +260,7 @@ if($ordem == 'desc'){
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-<script src="../../dist/js/bootstrap.min.js"></script>
+<script src="../../../dist/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>

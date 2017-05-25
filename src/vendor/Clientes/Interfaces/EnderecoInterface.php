@@ -1,11 +1,7 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: rogerio
- * Date: 19/05/17
- * Time: 09:23
- */
+namespace vendor\Clientes\Interfaces;
+
 interface EnderecoInterface
 {
     public function getEndereco();

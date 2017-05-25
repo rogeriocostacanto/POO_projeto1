@@ -1,50 +1,55 @@
 <?php
 
-require_once "EnderecoInterface.php";
-require_once "GraudeImportanciaInterface.php";
-require_once "End_Espec_CobrancaInterface.php";
+namespace vendor\Clientes\Types;
 
-class ClientePessoaFisica extends Cliente implements EnderecoInterface,GraudeImportanciaInterface,End_Espec_CobrancaInterface
+
+use vendor\Clientes\Cliente as Client;
+use vendor\Clientes\Interfaces\EnderecoInterface as EndInterface;
+use vendor\Clientes\Interfaces\GraudeImportanciaInterface as GrauImport;
+use vendor\Clientes\Interfaces\End_Espec_CobrancaInterface as End_Espec_Cobranc;
+
+//require_once "EnderecoInterface.php";
+//require_once "GraudeImportanciaInterface.php";
+//require_once "End_Espec_CobrancaInterface.php";
+
+class ClientePessoaJuridica extends Client implements EndInterface,GrauImport,End_Espec_Cobranc
 {
-    public $cpf;
+    public $cnpj;
     public $endereco;
     public $cidade;
     public $uf;
+    public $graudeimportancia;
     public $end_cobranca;
     public $tipo_end_cobranca;
-    public $graudeimportancia;
 
-    public function __construct($cpf,$endereco, $cidade,$uf,$end_cobranca,$tipo_end_cobranca,$graudeimportancia)
+
+    public function __construct($cnpj,$endereco, $cidade,$uf,$graudeimportancia, $end_cobranca, $tipo_end_cobranca)
     {
-        $this->cpf = $cpf;
+        $this->cnpj = $cnpj;
         $this->endereco = $endereco;
         $this->cidade = $cidade;
         $this->uf = $uf;
+        $this->graudeimportancia = $graudeimportancia;
         $this->end_cobranca = $end_cobranca;
         $this->tipo_end_cobranca = $tipo_end_cobranca;
-        $this->graudeimportancia = $graudeimportancia;
-
     }
 
     /**
      * @return mixed
      */
-    public function getCPF()
+    public function getCNPJ()
     {
-        return $this->cpf;
+        return $this->cnpj;
     }
 
     /**
      * @param mixed $cpf
      */
-    public function setCPF($cpf)
+    public function setCNPJ($cnpj)
     {
-        $this->cpf = $cpf;
+        $this->cnpj = $cnpj;
     }
 
-    /**
-     * @return mixed
-     */
     public function getEndereco()
     {
         return $this->endereco;
@@ -112,6 +117,5 @@ class ClientePessoaFisica extends Cliente implements EnderecoInterface,GraudeImp
     public function setTipoEnd_Cobranca($tipo_end_cobranca){
         $this->tipo_end_cobranca = $tipo_end_cobranca;
     }
-
 
 }

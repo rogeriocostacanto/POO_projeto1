@@ -1,5 +1,7 @@
 <?php
 
+namespace vendor\Clientes;
+
 
 class Cliente
 {
@@ -8,7 +10,7 @@ class Cliente
 
 
     /**
-     * Cliente constructor.
+     * Clientes constructor.
      * @param $nome
      * @param $telefone
      */
