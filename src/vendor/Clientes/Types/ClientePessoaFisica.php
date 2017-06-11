@@ -7,9 +7,6 @@ use vendor\Clientes\Interfaces\EnderecoInterface as EndInterface;
 use vendor\Clientes\Interfaces\GraudeImportanciaInterface as GrauImport;
 use vendor\Clientes\Interfaces\End_Espec_CobrancaInterface as End_Espec_Cobranc;
 
-//require_once "EnderecoInterface.php";
-//require_once "GraudeImportanciaInterface.php";
-//require_once "End_Espec_CobrancaInterface.php";
 
 class ClientePessoaFisica extends Client implements EndInterface,GrauImport,End_Espec_Cobranc
 {
@@ -21,8 +18,9 @@ class ClientePessoaFisica extends Client implements EndInterface,GrauImport,End_
     public $tipo_end_cobranca;
     public $graudeimportancia;
 
-    public function __construct($cpf,$endereco, $cidade,$uf,$end_cobranca,$tipo_end_cobranca,$graudeimportancia)
+    public function __construct(/*$cpf,$endereco, $cidade,$uf,$end_cobranca,$tipo_end_cobranca,$graudeimportancia*/)
     {
+        /*
         $this->cpf = $cpf;
         $this->endereco = $endereco;
         $this->cidade = $cidade;
@@ -30,7 +28,7 @@ class ClientePessoaFisica extends Client implements EndInterface,GrauImport,End_
         $this->end_cobranca = $end_cobranca;
         $this->tipo_end_cobranca = $tipo_end_cobranca;
         $this->graudeimportancia = $graudeimportancia;
-
+*/
     }
 
     /**

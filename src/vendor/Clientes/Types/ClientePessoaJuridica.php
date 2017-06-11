@@ -23,15 +23,15 @@ class ClientePessoaJuridica extends Client implements EndInterface,GrauImport,En
     public $tipo_end_cobranca;
 
 
-    public function __construct($cnpj,$endereco, $cidade,$uf,$graudeimportancia, $end_cobranca, $tipo_end_cobranca)
+    public function __construct(/*$cnpj,$endereco, $cidade,$uf,$graudeimportancia, $end_cobranca, $tipo_end_cobranca*/)
     {
-        $this->cnpj = $cnpj;
+        /*$this->cnpj = $cnpj;
         $this->endereco = $endereco;
         $this->cidade = $cidade;
         $this->uf = $uf;
         $this->graudeimportancia = $graudeimportancia;
         $this->end_cobranca = $end_cobranca;
-        $this->tipo_end_cobranca = $tipo_end_cobranca;
+        $this->tipo_end_cobranca = $tipo_end_cobranca;*/
     }
 
     /**
